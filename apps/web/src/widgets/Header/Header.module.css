@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding: 0 1.5rem;
+  background: var(--color-header-bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.languageSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.languageButton {
+  min-width: 2.5rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  border: 1px solid rgba(30, 30, 30, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #1a1a1a;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.languageButton:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.active {
+  border-color: transparent;
+  background: var(--color-accent);
+  color: #fff;
+}
