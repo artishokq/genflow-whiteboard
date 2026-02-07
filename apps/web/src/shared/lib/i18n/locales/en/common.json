@@ -1,0 +1,11 @@
+{
+    "appName": "GenFlow Whiteboard",
+    "auth": {
+      "signInTitle": "Sign in to GenFlow",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot password?",
+      "rememberMe": "Remember me",
+      "continue": "Continue"
+    }
+  }

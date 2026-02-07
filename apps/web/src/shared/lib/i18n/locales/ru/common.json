@@ -1,0 +1,11 @@
+{
+    "appName": "GenFlow Whiteboard",
+    "auth": {
+      "signInTitle": "Вход в GenFlow",
+      "email": "Почта",
+      "password": "Пароль",
+      "forgotPassword": "Забыли пароль?",
+      "rememberMe": "Запомнить меня",
+      "continue": "Продолжить"
+    }
+  }
