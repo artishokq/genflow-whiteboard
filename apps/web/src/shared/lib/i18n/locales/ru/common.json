@@ -1,11 +1,37 @@
 {
-    "appName": "GenFlow Whiteboard",
-    "auth": {
-      "signInTitle": "Вход в GenFlow",
-      "email": "Почта",
-      "password": "Пароль",
-      "forgotPassword": "Забыли пароль?",
-      "rememberMe": "Запомнить меня",
-      "continue": "Продолжить"
-    }
+  "appName": "GenFlow Whiteboard",
+  "header": {
+    "goToLogin": "Войти",
+    "goToRegister": "Регистрация"
+  },
+  "auth": {
+    "signInTitle": "Вход в GenFlow",
+    "email": "Почта",
+    "password": "Пароль",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "forgotPassword": "Забыли пароль?",
+    "rememberMe": "Запомнить меня",
+    "continue": "Продолжить"
+  },
+  "register": {
+    "title": "Регистрация в GenFlow",
+    "name": "Имя",
+    "lastname": "Фамилия",
+    "email": "Почта",
+    "password": "Пароль",
+    "confirmPassword": "Подтвердите пароль",
+    "namePlaceholder": "Иван",
+    "lastnamePlaceholder": "Иванов",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "register": "Создать аккаунт",
+    "confirmationCode": "Код подтверждения",
+    "confirmationCodeDescription": "Мы отправили 6-значный код на вашу почту. Введите его, чтобы завершить регистрацию.",
+    "confirmationCodeInput": "Введите 6-значный код",
+    "confirmationCodeConfirm": "Подтвердить почту",
+    "confirmationCodeResend": "Отправить код повторно",
+    "resendIn": "Отправить снова через {{time}}",
+    "changeEmail": "Изменить почту"
   }
+}

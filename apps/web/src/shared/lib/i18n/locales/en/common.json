@@ -1,11 +1,37 @@
 {
-    "appName": "GenFlow Whiteboard",
-    "auth": {
-      "signInTitle": "Sign in to GenFlow",
-      "email": "Email",
-      "password": "Password",
-      "forgotPassword": "Forgot password?",
-      "rememberMe": "Remember me",
-      "continue": "Continue"
-    }
+  "appName": "GenFlow Whiteboard",
+  "header": {
+    "goToLogin": "Sign in",
+    "goToRegister": "Create account"
+  },
+  "auth": {
+    "signInTitle": "Sign in to GenFlow",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "forgotPassword": "Forgot password?",
+    "rememberMe": "Remember me",
+    "continue": "Continue"
+  },
+  "register": {
+    "title": "Create your GenFlow account",
+    "name": "First name",
+    "lastname": "Last name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "namePlaceholder": "John",
+    "lastnamePlaceholder": "Doe",
+    "emailPlaceholder": "you@example.com",
+    "passwordPlaceholder": "••••••••",
+    "register": "Create account",
+    "confirmationCode": "Verification code",
+    "confirmationCodeDescription": "We sent a 6-digit code to your email. Enter it below to finish registration.",
+    "confirmationCodeInput": "Enter 6-digit code",
+    "confirmationCodeConfirm": "Confirm email",
+    "confirmationCodeResend": "Send code again",
+    "resendIn": "Send again in {{time}}",
+    "changeEmail": "Change email"
   }
+}
