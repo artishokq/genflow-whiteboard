@@ -1,6 +1,6 @@
 .card {
   width: 100%;
-  max-width: 400px;
+  max-width: 460px;
   padding: 2rem 2rem 2.25rem;
   background: var(--color-card);
   border-radius: var(--radius-card);
