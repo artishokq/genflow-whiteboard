@@ -16,6 +16,32 @@
   letter-spacing: -0.02em;
 }
 
+.rightControls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.navAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 8.5rem;
+  height: 2rem;
+  padding: 0 0.8rem;
+  border: 1px solid rgba(30, 30, 30, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.45);
+  color: #1a1a1a;
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.navAction:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
 .languageSwitch {
   display: inline-flex;
   align-items: center;

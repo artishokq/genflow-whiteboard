@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./Header.module.css";
 
 export function Header() {
   const { t, i18n } = useTranslation();
+  const { pathname } = useLocation();
   const language = i18n.resolvedLanguage?.startsWith("ru") ? "ru" : "en";
+  const isRegisterPage = pathname.startsWith("/register");
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -18,21 +21,26 @@ export function Header() {
   return (
     <header className={styles.header}>
       <p className={styles.title}>{t("appName")}</p>
-      <div className={styles.languageSwitch} aria-label="Language switcher">
-        <button
-          type="button"
-          className={`${styles.languageButton} ${language === "ru" ? styles.active : ""}`}
-          onClick={() => handleChangeLanguage("ru")}
-        >
-          RU
-        </button>
-        <button
-          type="button"
-          className={`${styles.languageButton} ${language === "en" ? styles.active : ""}`}
-          onClick={() => handleChangeLanguage("en")}
-        >
-          EN
-        </button>
+      <div className={styles.rightControls}>
+        <Link className={styles.navAction} to={isRegisterPage ? "/login" : "/register"}>
+          {isRegisterPage ? t("header.goToLogin") : t("header.goToRegister")}
+        </Link>
+        <div className={styles.languageSwitch} aria-label="Language switcher">
+          <button
+            type="button"
+            className={`${styles.languageButton} ${language === "ru" ? styles.active : ""}`}
+            onClick={() => handleChangeLanguage("ru")}
+          >
+            RU
+          </button>
+          <button
+            type="button"
+            className={`${styles.languageButton} ${language === "en" ? styles.active : ""}`}
+            onClick={() => handleChangeLanguage("en")}
+          >
+            EN
+          </button>
+        </div>
       </div>
     </header>
   );
