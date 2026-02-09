@@ -7,8 +7,8 @@ import { LoginForm } from "./components/LoginForm";
 import styles from "./LoginPage.module.css";
 
 function LoginPage() {
-    const { t } = useTranslation();
-    
+  const { t } = useTranslation();
+
   return (
     <div className={styles.page}>
       <Header />

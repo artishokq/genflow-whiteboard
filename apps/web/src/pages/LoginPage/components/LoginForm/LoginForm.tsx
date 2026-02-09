@@ -1,38 +1,30 @@
 import { useTranslation } from "react-i18next";
 
+import { Button } from "../../../../shared/ui/Button";
+import { Input } from "../../../../shared/ui/Input";
 import styles from "./LoginForm.module.css";
 
 export function LoginForm() {
   const { t } = useTranslation();
   return (
     <form className={styles.form} noValidate>
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="login-email">
-        {t("auth.email")}
-        </label>
-        <input
-          id="login-email"
-          className={styles.input}
-          type="email"
-          name="email"
-          autoComplete="email"
-          placeholder="you@example.com"
-        />
-      </div>
+      <Input
+        id="login-email"
+        label={t("auth.email")}
+        type="email"
+        name="email"
+        autoComplete="email"
+        placeholder={t("auth.emailPlaceholder")}
+      />
 
-      <div className={styles.field}>
-        <label className={styles.label} htmlFor="login-password">
-        {t("auth.password")}
-        </label>
-        <input
-          id="login-password"
-          className={styles.input}
-          type="password"
-          name="password"
-          autoComplete="current-password"
-          placeholder="••••••••"
-        />
-      </div>
+      <Input
+        id="login-password"
+        label={t("auth.password")}
+        type="password"
+        name="password"
+        autoComplete="current-password"
+        placeholder={t("auth.passwordPlaceholder")}
+      />
 
       <div className={styles.rowAfterPassword}>
         <button type="button" className={styles.forgotLink}>
@@ -49,9 +41,9 @@ export function LoginForm() {
         </label>
       </div>
 
-      <button type="button" className={styles.submit}>
+      <Button type="button" className={styles.submit}>
         {t("auth.continue")}
-      </button>
+      </Button>
     </form>
   );
 }
