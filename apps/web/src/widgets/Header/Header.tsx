@@ -8,7 +8,8 @@ export function Header() {
   const { t, i18n } = useTranslation();
   const { pathname } = useLocation();
   const language = i18n.resolvedLanguage?.startsWith("ru") ? "ru" : "en";
-  const isRegisterPage = pathname.startsWith("/register");
+  const shouldShowLoginAction =
+    pathname.startsWith("/register") || pathname.startsWith("/recover");
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -22,8 +23,8 @@ export function Header() {
     <header className={styles.header}>
       <p className={styles.title}>{t("appName")}</p>
       <div className={styles.rightControls}>
-        <Link className={styles.navAction} to={isRegisterPage ? "/login" : "/register"}>
-          {isRegisterPage ? t("header.goToLogin") : t("header.goToRegister")}
+        <Link className={styles.navAction} to={shouldShowLoginAction ? "/login" : "/register"}>
+          {shouldShowLoginAction ? t("header.goToLogin") : t("header.goToRegister")}
         </Link>
         <div className={styles.languageSwitch} aria-label="Language switcher">
           <button
