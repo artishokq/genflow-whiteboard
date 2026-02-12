@@ -33,5 +33,22 @@
     "confirmationCodeResend": "Send code again",
     "resendIn": "Send again in {{time}}",
     "changeEmail": "Change email"
+  },
+  "recover": {
+    "title": "Password recovery",
+    "requestDescription": "Enter your email and we will send you a recovery code.",
+    "resetDescription": "Enter the code from email and set a new password.",
+    "email": "Email",
+    "emailPlaceholder": "you@example.com",
+    "sendCode": "Send recovery code",
+    "code": "Recovery code",
+    "codePlaceholder": "Enter 6-digit code",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "passwordPlaceholder": "••••••••",
+    "updatePassword": "Update password",
+    "resendCode": "Send code again",
+    "resendIn": "Send again in {{time}}",
+    "changeEmail": "Change email"
   }
 }

@@ -33,5 +33,22 @@
     "confirmationCodeResend": "Отправить код повторно",
     "resendIn": "Отправить снова через {{time}}",
     "changeEmail": "Изменить почту"
+  },
+  "recover": {
+    "title": "Восстановление пароля",
+    "requestDescription": "Введите почту, и мы отправим код для восстановления.",
+    "resetDescription": "Введите код из письма и задайте новый пароль.",
+    "email": "Почта",
+    "emailPlaceholder": "you@example.com",
+    "sendCode": "Отправить код восстановления",
+    "code": "Код восстановления",
+    "codePlaceholder": "Введите 6-значный код",
+    "newPassword": "Новый пароль",
+    "confirmPassword": "Подтвердите новый пароль",
+    "passwordPlaceholder": "••••••••",
+    "updatePassword": "Обновить пароль",
+    "resendCode": "Отправить код повторно",
+    "resendIn": "Отправить снова через {{time}}",
+    "changeEmail": "Изменить почту"
   }
 }
