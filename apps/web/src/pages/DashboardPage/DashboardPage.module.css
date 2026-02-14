@@ -1,0 +1,132 @@
+.page {
+  min-height: 100vh;
+  background: var(--color-page-bg);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: calc(100vh - 3.5rem);
+}
+
+.sidebar {
+  padding: 1rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.search {
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  border: none;
+  border-radius: 10px;
+  background: #f4f5ff;
+  font: inherit;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.85rem;
+}
+
+.sectionLink {
+  display: flex;
+  align-items: center;
+  height: 2.1rem;
+  padding: 0 0.65rem;
+  border-radius: 10px;
+  background: transparent;
+  font: inherit;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sectionLink:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.sectionLinkActive {
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.addSectionButton {
+  display: grid;
+  place-items: center;
+  margin-top: 0.9rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid rgba(30, 30, 30, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.addSectionButton:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.addSectionIcon {
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.content {
+  padding: 1rem 1.2rem;
+}
+
+.templatesBlock {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.7rem;
+  padding: 0.65rem;
+  border: 1px solid rgba(100, 110, 170, 0.4);
+  border-radius: 14px;
+  background: rgba(227, 232, 255, 0.5);
+}
+
+.templateCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.templatePreview {
+  display: grid;
+  place-items: center;
+  height: 5rem;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.templateTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.templateGhost {
+  height: 5rem;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.emptyHint {
+  margin: 11rem 0 0;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(55, 55, 85, 0.35);
+}
