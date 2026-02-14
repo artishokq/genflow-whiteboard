@@ -2,7 +2,23 @@
   "appName": "GenFlow Whiteboard",
   "header": {
     "goToLogin": "Sign in",
-    "goToRegister": "Create account"
+    "goToRegister": "Create account",
+    "userDisplayName": "User",
+    "menuProfile": "Profile",
+    "menuSwitchToEn": "Switch to English",
+    "menuSwitchToRu": "Switch to Russian",
+    "menuInfo": "Information",
+    "menuLogout": "Log out"
+  },
+  "profile": {
+    "title": "Profile",
+    "placeholder": "Profile settings will appear here later.",
+    "backToDashboard": "Back to dashboard"
+  },
+  "info": {
+    "title": "Information",
+    "body": "GenFlow Whiteboard is a collaborative whiteboard with AI-assisted content. This page will hold product information and links.",
+    "backToDashboard": "Back to dashboard"
   },
   "auth": {
     "signInTitle": "Sign in to GenFlow",
@@ -50,5 +66,23 @@
     "resendCode": "Send code again",
     "resendIn": "Send again in {{time}}",
     "changeEmail": "Change email"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or was moved.",
+    "goHome": "Go to login page"
+  },
+  "dashboard": {
+    "userButton": "User menu",
+    "searchPlaceholder": "Search by title",
+    "sectionsAriaLabel": "Board sections",
+    "personal": "Personal",
+    "recent": "Recent",
+    "starred": "Starred",
+    "newSection": "Create new section",
+    "emptyTemplate": "Empty template",
+    "emptyState": "Nothing here yet",
+    "emptyRecent": "No recent boards yet",
+    "emptyStarred": "No starred boards yet"
   }
 }

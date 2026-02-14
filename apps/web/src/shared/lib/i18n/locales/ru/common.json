@@ -2,7 +2,23 @@
   "appName": "GenFlow Whiteboard",
   "header": {
     "goToLogin": "Войти",
-    "goToRegister": "Регистрация"
+    "goToRegister": "Регистрация",
+    "userDisplayName": "Пользователь",
+    "menuProfile": "Профиль",
+    "menuSwitchToEn": "Переключить на английский",
+    "menuSwitchToRu": "Переключить на русский",
+    "menuInfo": "Информация",
+    "menuLogout": "Выйти"
+  },
+  "profile": {
+    "title": "Профиль",
+    "placeholder": "Настройки профиля появятся здесь позже.",
+    "backToDashboard": "Назад к доскам"
+  },
+  "info": {
+    "title": "Информация",
+    "body": "GenFlow Whiteboard — совместная доска с поддержкой ИИ. На этой странице позже будет справочная информация и ссылки.",
+    "backToDashboard": "Назад к доскам"
   },
   "auth": {
     "signInTitle": "Вход в GenFlow",
@@ -50,5 +66,23 @@
     "resendCode": "Отправить код повторно",
     "resendIn": "Отправить снова через {{time}}",
     "changeEmail": "Изменить почту"
+  },
+  "notFound": {
+    "title": "Страница не найдена",
+    "description": "Похоже, такой страницы не существует или она была перемещена.",
+    "goHome": "Перейти на страницу входа"
+  },
+  "dashboard": {
+    "userButton": "Меню пользователя",
+    "searchPlaceholder": "Поиск по названию",
+    "sectionsAriaLabel": "Разделы досок",
+    "personal": "Личный",
+    "recent": "Недавние",
+    "starred": "Помеченные",
+    "newSection": "Создать новый раздел",
+    "emptyTemplate": "Пустой шаблон",
+    "emptyState": "Пока пусто",
+    "emptyRecent": "Недавних досок пока нет",
+    "emptyStarred": "Помеченных досок пока нет"
   }
 }
