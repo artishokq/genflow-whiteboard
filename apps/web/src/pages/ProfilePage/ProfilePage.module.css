@@ -1,0 +1,30 @@
+.page {
+  min-height: 100vh;
+  background: var(--color-page-bg);
+}
+
+.main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.title {
+  margin: 0 0 0.75rem;
+  font-size: 1.5rem;
+}
+
+.hint {
+  margin: 0 0 1.5rem;
+  color: rgba(26, 26, 26, 0.65);
+}
+
+.backLink {
+  font-weight: 600;
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
