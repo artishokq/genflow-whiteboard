@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 import { Button } from "../../../../shared/ui/Button";
 import { Input } from "../../../../shared/ui/Input";
@@ -27,9 +28,9 @@ export function LoginForm() {
       />
 
       <div className={styles.rowAfterPassword}>
-        <button type="button" className={styles.forgotLink}>
-        {t("auth.forgotPassword")}
-        </button>
+        <Link to="/recover" className={styles.forgotLink}>
+          {t("auth.forgotPassword")}
+        </Link>
         <label className={styles.remember}>
           <input
             className={styles.checkbox}

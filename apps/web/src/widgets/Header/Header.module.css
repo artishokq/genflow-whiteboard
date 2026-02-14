@@ -16,10 +16,121 @@
   letter-spacing: -0.02em;
 }
 
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.titleLink:hover .title {
+  opacity: 0.85;
+}
+
 .rightControls {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.userButton {
+  width: 2.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.userIcon {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.userMenuWrap {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  right: 0;
+  z-index: 50;
+  min-width: 15.5rem;
+  padding: 0.35rem 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(30, 30, 60, 0.18);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.9rem 0.5rem;
+}
+
+.dropdownAvatar {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--color-header-bg);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.dropdownName {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.dropdownDivider {
+  height: 1px;
+  margin: 0.25rem 0;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.dropdownItem,
+.dropdownItemDanger {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdownItem:hover,
+.dropdownItemDanger:hover {
+  background: rgba(139, 126, 200, 0.12);
+}
+
+.dropdownItemDanger {
+  color: #b42318;
+}
+
+.dropdownItemDanger:hover {
+  background: rgba(180, 35, 24, 0.08);
+}
+
+.dropdownItemIcon {
+  display: grid;
+  place-items: center;
+  width: 1.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(26, 26, 26, 0.45);
 }
 
 .navAction {
