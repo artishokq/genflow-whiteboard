@@ -1,0 +1,47 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 3rem;
+  background: var(--color-page-bg);
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  background: var(--color-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.code {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent);
+}
+
+.title {
+  margin: 0.9rem 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.description {
+  margin: 0 0 1.5rem;
+  color: rgba(26, 26, 26, 0.75);
+}
+
+.link {
+  display: block;
+  text-decoration: none;
+}
