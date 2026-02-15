@@ -16,10 +16,10 @@ export function RegisterForm() {
   useEffect(() => {
     if (step !== "verify" || resendSeconds <= 0) return;
 
-    const intervalId = window.setInterval(() => {
+    const intervalId = setInterval(() => {
       setResendSeconds((current) => {
         if (current <= 1) {
-          window.clearInterval(intervalId);
+          clearInterval(intervalId);
           return 0;
         }
 
@@ -27,7 +27,7 @@ export function RegisterForm() {
       });
     }, 1000);
 
-    return () => window.clearInterval(intervalId);
+    return () => clearInterval(intervalId);
   }, [step, resendSeconds]);
 
   const handleRegisterSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -47,13 +47,19 @@ export function RegisterForm() {
 
   const resendLabel =
     resendSeconds > 0
-      ? t("register.resendIn", { time: `00:${String(resendSeconds).padStart(2, "0")}` })
+      ? t("register.resendIn", {
+          time: `00:${String(resendSeconds).padStart(2, "0")}`,
+        })
       : t("register.confirmationCodeResend");
 
   return (
     <>
       {step === "register" ? (
-        <form className={styles.form} noValidate onSubmit={handleRegisterSubmit}>
+        <form
+          className={styles.form}
+          noValidate
+          onSubmit={handleRegisterSubmit}
+        >
           <Input
             id="register-name"
             label={t("register.name")}
@@ -105,7 +111,9 @@ export function RegisterForm() {
         </form>
       ) : (
         <form className={styles.form} noValidate onSubmit={handleVerifySubmit}>
-          <p className={styles.description}>{t("register.confirmationCodeDescription")}</p>
+          <p className={styles.description}>
+            {t("register.confirmationCodeDescription")}
+          </p>
 
           <Input
             id="register-confirmation-code"
