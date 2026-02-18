@@ -5,3 +5,6 @@ dist
 .env.*
 .DS_Store
 .cursor/
+.pnpm-store/
+*.log
+coverage/
