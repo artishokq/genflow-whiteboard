@@ -36,6 +36,62 @@
       "when": 1775831563068,
       "tag": "0004_clear_havok",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1776197069007,
+      "tag": "0005_unique_clea",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1776268777788,
+      "tag": "0006_overjoyed_midnight",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1776809049683,
+      "tag": "0007_board_sharing",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1776968463861,
+      "tag": "0008_board_comments",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1777000000000,
+      "tag": "0009_board_user_prefs",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1777100000000,
+      "tag": "0010_user_avatar",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1777245600000,
+      "tag": "0011_recent_board_views",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1777248300000,
+      "tag": "0012_board_sections",
+      "breakpoints": true
     }
   ]
 }
