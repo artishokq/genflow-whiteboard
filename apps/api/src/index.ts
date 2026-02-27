@@ -1,12 +1,13 @@
+import "dotenv/config";
+import http from "node:http";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import express from "express";
+
 import { checkDbConnection } from "./db/client";
-
-require("dotenv").config();
-
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const router = require("./router");
-const errorMiddleware = require("./middlewares/ErrorMiddleware");
+import errorMiddleware from "./middlewares/ErrorMiddleware";
+import router from "./router";
+import { registerBoardWebSocket } from "./ws/boardCollaboration";
 
 const app = express();
 
@@ -23,10 +24,13 @@ app.use(
 app.use("/api", router);
 app.use(errorMiddleware);
 
+const server = http.createServer(app);
+registerBoardWebSocket(server);
+
 const start = async () => {
   try {
     await checkDbConnection();
-    app.listen(process.env.PORT, () =>
+    server.listen(process.env.PORT, () =>
       console.log(`Server is running on port ${process.env.PORT}`),
     );
   } catch (e) {
