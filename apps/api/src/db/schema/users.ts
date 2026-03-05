@@ -8,6 +8,8 @@ export const users = pgTable("users", {
   passwordHash: text("password_hash").notNull(),
   isEmailVerified: boolean("is_email_verified").notNull().default(false),
   role: text("role").notNull().default("user"), // user | admin
+  /** R2 key `users/{userId}/{uuid}.ext`; null = initials-only */
+  avatarObjectKey: text("avatar_object_key"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
