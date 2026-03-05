@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc --noEmit",
+    "gc:board-images": "tsx src/scripts/gcBoardImages.ts",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio"
@@ -15,6 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1037.0",
+    "@types/multer": "^2.1.0",
     "argon2": "^0.44.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -24,15 +27,20 @@
     "express-rate-limit": "^8.3.2",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
+    "multer": "^2.1.1",
     "nodemailer": "^8.0.5",
     "pg": "^8.20.0",
     "shared": "workspace:^",
-    "ws": "^8.19.0"
+    "ws": "^8.19.0",
+    "yjs": "^13.6.30"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.10.1",
+    "@types/nodemailer": "^8.0.0",
     "@types/pg": "^8.20.0",
     "@types/ws": "^8.18.1",
     "drizzle-kit": "^0.31.10",
