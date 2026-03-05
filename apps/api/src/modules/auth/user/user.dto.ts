@@ -4,7 +4,7 @@ type UserDtoModel = {
     isEmailVerified: boolean;
 };
 
-module.exports = class UserDto {
+export default class UserDto {
     id: string;
     email: string;
     isEmailVerified: boolean;
