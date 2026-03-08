@@ -1,4 +1,4 @@
-module.exports = class ApiError extends Error {
+export default class ApiError extends Error {
   status: number;
   message: string;
   errors: unknown[];
@@ -25,4 +25,8 @@ module.exports = class ApiError extends Error {
   static NotFound(message: string) {
     return new ApiError(404, message);
   }
-};
+
+  static Forbidden(message: string) {
+    return new ApiError(403, message);
+  }
+}

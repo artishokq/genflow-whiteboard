@@ -1,8 +1,8 @@
 import type { NextFunction, Request, Response } from "express";
 
-const ApiError = require("../exceptions/ApiError");
+import ApiError from "../exceptions/ApiError";
 
-module.exports = function (
+export default function errorMiddleware(
   err: any,
   req: Request,
   res: Response,
@@ -18,4 +18,4 @@ module.exports = function (
   return res.status(500).json({
     message: "Internal server error",
   });
-};
+}
