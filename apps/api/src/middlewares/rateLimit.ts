@@ -1,6 +1,8 @@
 export {};
 
-const rateLimit = require("express-rate-limit");
+import { rateLimit } from "express-rate-limit";
+
+const TOO_MANY_REQUESTS = { message: "Too many requests. Try again later." };
 
 const registerFlowLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
@@ -12,10 +14,31 @@ const registerFlowLimiter = rateLimit({
 
 const authSessionLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 60,
-  message: { message: "Too many requests. Try again later." },
+  max: 120,
+  message: TOO_MANY_REQUESTS,
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-module.exports = { registerFlowLimiter, authSessionLimiter };
+const boardApiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 600,
+  message: TOO_MANY_REQUESTS,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const boardSnapshotLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 240,
+  message: TOO_MANY_REQUESTS,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+export {
+  registerFlowLimiter,
+  authSessionLimiter,
+  boardApiLimiter,
+  boardSnapshotLimiter,
+};

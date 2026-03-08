@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 
-const ApiError = require("../exceptions/ApiError");
-const tokenService = require("../modules/auth/token/token.service");
+import ApiError from "../exceptions/ApiError";
+import tokenService from "../modules/auth/token/token.service";
 
 function requireAuth(req: Request, res: Response, next: NextFunction) {
   const header = req.headers.authorization;
@@ -23,4 +23,4 @@ function requireAuth(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-module.exports = { requireAuth };
+export { requireAuth };

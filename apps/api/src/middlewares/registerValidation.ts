@@ -1,9 +1,15 @@
 export {};
 
-const { body, validationResult } = require("express-validator");
-const ApiError = require("../exceptions/ApiError");
+import type { NextFunction, Request, Response } from "express";
+import { body, validationResult } from "express-validator";
 
-function handleValidationErrors(req: any, res: any, next: any) {
+import ApiError from "../exceptions/ApiError";
+
+function handleValidationErrors(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   const result = validationResult(req);
   if (!result.isEmpty()) {
     const messages = result
@@ -37,4 +43,4 @@ const registerValidators = [
   handleValidationErrors,
 ];
 
-module.exports = { registerValidators, handleValidationErrors };
+export { registerValidators, handleValidationErrors };
