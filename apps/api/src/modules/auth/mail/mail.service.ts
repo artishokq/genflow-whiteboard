@@ -1,6 +1,6 @@
 export {};
 
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 class MailService {
   transporter: any;
@@ -35,6 +35,42 @@ class MailService {
       `,
     });
   }
+
+  async sendEmailChangeCodeMail(to: string, code: string) {
+    await this.transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to,
+      subject: "Email change code for GenFlow Whiteboard",
+      text: `Your email change code is ${code}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.5;">
+          <h2>GenFlow Whiteboard</h2>
+          <p>Your email change code:</p>
+          <p style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">${code}</p>
+          <p>The code is valid for 15 minutes.</p>
+        </div>
+      `,
+    });
+  }
+
+  async sendPasswordResetCodeMail(to: string, code: string) {
+    await this.transporter.sendMail({
+      from: process.env.SMTP_USER,
+      to,
+      subject: "Password reset code for GenFlow Whiteboard",
+      text: `Your password reset code is ${code}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.5;">
+          <h2>GenFlow Whiteboard</h2>
+          <p>Your password reset code:</p>
+          <p style="font-size: 24px; font-weight: bold; letter-spacing: 2px;">${code}</p>
+          <p>The code is valid for 15 minutes.</p>
+        </div>
+      `,
+    });
+  }
 }
 
-module.exports = new MailService();
+const mailService = new MailService();
+
+export default mailService;

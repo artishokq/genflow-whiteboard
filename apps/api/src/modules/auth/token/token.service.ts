@@ -1,10 +1,18 @@
 export {};
 
-const crypto = require("node:crypto");
-const jwt = require("jsonwebtoken");
-const { eq } = require("drizzle-orm");
-const { db } = require("../../../db/client");
-const { tokens } = require("../../../db/schema");
+import crypto from "node:crypto";
+
+import { eq } from "drizzle-orm";
+import jwt, { type JwtPayload } from "jsonwebtoken";
+
+import { db } from "../../../db/client";
+import { tokens } from "../../../db/schema";
+
+function getEnv(name: "JWT_ACCESS_SECRET" | "JWT_REFRESH_SECRET"): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`${name} is not set`);
+  return value;
+}
 
 class TokenService {
     hashRefreshToken(refreshToken: string) {
@@ -19,8 +27,8 @@ class TokenService {
     }
 
     generateTokens(payload: Record<string, unknown>) {
-        const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, { expiresIn: "30m" });
-        const refreshToken = jwt.sign(payload, process.env.JWT_REFRESH_SECRET, { expiresIn: "15d" });
+        const accessToken = jwt.sign(payload, getEnv("JWT_ACCESS_SECRET"), { expiresIn: "30m" });
+        const refreshToken = jwt.sign(payload, getEnv("JWT_REFRESH_SECRET"), { expiresIn: "15d" });
         return {
             accessToken,
             refreshToken,
@@ -74,21 +82,23 @@ class TokenService {
         return foundTokens[0] ?? null;
     }
 
-    validateRefreshToken(token: string) {
+    validateRefreshToken(token: string): JwtPayload | string | null {
         try {
-            return jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+            return jwt.verify(token, getEnv("JWT_REFRESH_SECRET"));
         } catch (e) {
             return null;
         }
     }
 
-    validateAccessToken(token: string) {
+    validateAccessToken(token: string): JwtPayload | string | null {
         try {
-            return jwt.verify(token, process.env.JWT_ACCESS_SECRET);
+            return jwt.verify(token, getEnv("JWT_ACCESS_SECRET"));
         } catch (e) {
             return null;
         }
     }
 }
 
-module.exports = new TokenService();
+const tokenService = new TokenService();
+
+export default tokenService;
