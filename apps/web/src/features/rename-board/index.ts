@@ -1,0 +1,1 @@
+export { useRenameBoard } from "./useRenameBoard";
