@@ -5,7 +5,7 @@
 
 .main {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 252px 1fr;
   min-height: calc(100vh - 3.5rem);
 }
 
@@ -17,11 +17,21 @@
 .search {
   width: 100%;
   height: 2.25rem;
-  padding: 0 0.85rem;
+  box-sizing: border-box;
+  padding: 0 1.1rem 0 0.85rem;
   border: none;
   border-radius: 10px;
   background: #f4f5ff;
   font: inherit;
+  font-size: 0.95rem;
+}
+
+.search::-webkit-search-decoration,
+.search::-webkit-search-cancel-button,
+.search::-webkit-search-results-button,
+.search::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .sections {
@@ -34,6 +44,7 @@
 .sectionLink {
   display: flex;
   align-items: center;
+  gap: 0.45rem;
   height: 2.1rem;
   padding: 0 0.65rem;
   border-radius: 10px;
@@ -52,6 +63,47 @@
 .sectionLinkActive {
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.sectionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sectionRow .sectionLink {
+  flex: 1;
+  min-width: 0;
+}
+
+.sectionLinkText {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sectionLinkIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.sectionRowMenu {
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(47, 52, 80, 0.72);
+  width: 1.9rem;
+  height: 1.9rem;
+  line-height: 1;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.sectionRowMenu:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .addSectionButton {
@@ -85,36 +137,337 @@
   padding: 1rem 1.2rem;
 }
 
+.dashboardSection {
+  margin-bottom: 1.35rem;
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 550;
+  color: #2e3143;
+}
+
 .templatesBlock {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(120px, 1fr));
-  gap: 0.7rem;
-  padding: 0.65rem;
-  border: 1px solid rgba(100, 110, 170, 0.4);
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.8rem;
+  border: 1px solid rgba(112, 121, 168, 0.27);
   border-radius: 14px;
-  background: rgba(227, 232, 255, 0.5);
+  background: #f1f3f8;
 }
 
 .templateCard {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.46rem;
+  width: 150px;
 }
 
 .templatePreview {
   display: grid;
   place-items: center;
-  height: 5rem;
+  height: 4.8rem;
   border-radius: 12px;
-  background: #fff;
-  font-size: 2rem;
-  font-weight: 700;
+  border: 1px solid #dde0eb;
+  background: #ffffff;
+}
+
+.templatePlus {
+  font-size: 1.65rem;
+  font-weight: 400;
+  line-height: 1;
+  color: #4a4f66;
 }
 
 .templateTitle {
   margin: 0;
-  font-size: 1.05rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #3a3f55;
+}
+
+.templateHint {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: #6a6f84;
+}
+
+.templateInteractive {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.templateInteractive:focus-visible {
+  outline: 2px solid #4a5fc1;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+.templateInteractive:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.userBoardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.userBoardCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(123, 130, 171, 0.35);
+  border-radius: 12px;
+  background: var(--color-card);
+  color: var(--color-text);
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(74, 95, 193, 0.08);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.userBoardCard:hover {
+  transform: translateY(-1px);
+  border-color: rgba(74, 95, 193, 0.45);
+  box-shadow: 0 6px 18px rgba(74, 95, 193, 0.15);
+}
+
+.userBoardPreview {
+  position: relative;
+  height: 124px;
+  border-bottom: 1px solid rgba(123, 130, 171, 0.22);
+  background:
+    radial-gradient(
+      circle at 18% 22%,
+      rgba(255, 255, 255, 0.8) 0 14%,
+      transparent 16%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(255, 255, 255, 0.62) 0 12%,
+      transparent 14%
+    ),
+    linear-gradient(135deg, #e9edff 0%, #dce3ff 44%, #ced8ff 100%);
+}
+
+.userBoardPreviewCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.userBoardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.68rem 0.72rem 0.75rem;
+}
+
+.userBoardTitle {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 550;
+  color: #2f3450;
+  text-align: left;
+}
+
+.userBoardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.boardRoleBadge {
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 95, 193, 0.26);
+  background: rgba(74, 95, 193, 0.1);
+  color: #4a5fc1;
+  padding: 0.12rem 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 650;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.userBoardEdited {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(47, 52, 80, 0.64);
+  text-align: left;
+}
+
+.boardStarButton {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 1;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid rgba(40, 45, 68, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(40, 45, 68, 0.6);
+  font-size: 1rem;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.boardStarVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.boardStarButtonActive {
+  color: #5f56b8;
+  border-color: rgba(95, 86, 184, 0.35);
+}
+
+.renameInput {
+  width: 100%;
+  height: 2rem;
+  border: 1px solid rgba(95, 86, 184, 0.32);
+  border-radius: 8px;
+  background: #f6f7ff;
+  padding: 0 0.55rem;
+  font: inherit;
+  font-size: 0.92rem;
+  color: #2f3450;
+}
+
+.renameInput:focus {
+  outline: none;
+  border-color: rgba(74, 95, 193, 0.8);
+  box-shadow: 0 0 0 2px rgba(74, 95, 193, 0.14);
+}
+
+.contextMenu {
+  position: fixed;
+  z-index: 35;
+  min-width: 220px;
+  border: 1px solid rgba(37, 40, 58, 0.17);
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 10px 26px rgba(29, 34, 59, 0.2);
+  padding: 0.32rem;
+}
+
+.contextMenuItem {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  font-size: 0.92rem;
+  color: #2f3450;
+  padding: 0.58rem 0.62rem;
+  cursor: pointer;
+}
+
+.contextMenuItem:hover {
+  background: #f2f4ff;
+}
+
+.contextMenuDanger {
+  color: #9d2635;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgba(20, 23, 36, 0.33);
+}
+
+.modalCard {
+  width: min(92vw, 420px);
+  border-radius: 14px;
+  border: 1px solid rgba(42, 45, 70, 0.12);
+  background: #fff;
+  box-shadow: 0 14px 36px rgba(18, 21, 33, 0.2);
+  padding: 1rem 1rem 0.92rem;
+}
+
+.modalTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: #2f3450;
+}
+
+.modalText {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(47, 52, 80, 0.78);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.modalSecondary,
+.modalDanger {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.72rem;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.modalSecondary {
+  background: #eceffd;
+  color: #3f4667;
+}
+
+.modalDanger {
+  background: #b33b4b;
+  color: #fff;
+}
+
+.feedbackError {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  background: rgba(200, 80, 80, 0.12);
+  color: #8a2020;
+  font-size: 0.92rem;
+}
+
+.feedbackMuted {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  color: rgba(55, 55, 85, 0.55);
 }
 
 .templateGhost {
@@ -124,9 +477,9 @@
 }
 
 .emptyHint {
-  margin: 11rem 0 0;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  color: rgba(55, 55, 85, 0.35);
+  margin: 1rem 0 0;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(55, 55, 85, 0.55);
 }
