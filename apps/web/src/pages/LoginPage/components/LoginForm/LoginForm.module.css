@@ -4,6 +4,15 @@
   gap: 1rem;
 }
 
+.error {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #b42318;
+  background: rgba(180, 35, 24, 0.08);
+}
+
 .rowAfterPassword {
   display: flex;
   align-items: center;
@@ -44,4 +53,21 @@
 .submit {
   margin-top: 0.5rem;
   width: 100%;
+}
+
+.passwordToggle {
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  padding: 0.2rem;
+  line-height: 1;
+  font-size: 1rem;
+}
+
+.passwordIcon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  object-fit: contain;
 }
