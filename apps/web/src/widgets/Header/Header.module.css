@@ -32,19 +32,34 @@
 }
 
 .userButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 2.25rem;
   height: 2.25rem;
+  padding: 0;
   border: none;
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  overflow: hidden;
+  line-height: 0;
 }
 
 .userIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1;
+}
+
+.headerAvatar {
+  flex-shrink: 0;
 }
 
 .userMenuWrap {
@@ -80,6 +95,10 @@
   background: var(--color-header-bg);
   font-size: 0.95rem;
   font-weight: 700;
+}
+
+.dropdownAvatarImg {
+  flex-shrink: 0;
 }
 
 .dropdownName {
