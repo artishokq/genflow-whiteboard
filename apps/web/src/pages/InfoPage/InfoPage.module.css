@@ -21,11 +21,27 @@
 }
 
 .backLink {
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.55rem;
+  cursor: pointer;
   font-weight: 600;
+  font-size: 1.1rem;
   color: var(--color-link);
   text-decoration: none;
+  border-radius: 8px;
+}
+
+.backLink:hover,
+.link:hover {
+  text-decoration: underline;
 }
 
 .backLink:hover {
-  text-decoration: underline;
+  background: rgba(90, 79, 207, 0.08);
+}
+
+.link {
+  color: var(--color-link);
+  text-decoration: none;
 }
