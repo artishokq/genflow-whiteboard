@@ -1,6 +1,6 @@
 import { useRef, type RefObject } from "react";
 import type Konva from "konva";
-import { Circle, Group, Image as KonvaImage, Layer, Rect, Text as KonvaText, Transformer } from "react-konva";
+import { Circle, Group, Layer, Rect, Text as KonvaText, Transformer } from "react-konva";
 import useImage from "use-image";
 
 import type { BoardElement, BoardFrameElement } from "../../../entities/board";
@@ -24,9 +24,9 @@ type CanvasOverlayLayersProps = {
   onTransformStart: () => void;
   onTransformEnd?: () => void;
   boundBoxFunc: (
-    oldBox: { x: number; y: number; width: number; height: number },
-    newBox: { x: number; y: number; width: number; height: number },
-  ) => { x: number; y: number; width: number; height: number };
+    oldBox: { x: number; y: number; width: number; height: number; rotation: number },
+    newBox: { x: number; y: number; width: number; height: number; rotation: number },
+  ) => { x: number; y: number; width: number; height: number; rotation: number };
   multiSelectionBounds?: { x: number; y: number; width: number; height: number } | null;
   multiSelectionDraggable?: boolean;
   multiSelectionPreviewDelta?: { dx: number; dy: number } | null;
@@ -53,7 +53,7 @@ export function CanvasOverlayLayers({
   boundBoxFunc,
   multiSelectionBounds = null,
   multiSelectionDraggable = false,
-  multiSelectionPreviewDelta = null,
+  multiSelectionPreviewDelta: _multiSelectionPreviewDelta = null,
   onMultiSelectionDrag,
 }: CanvasOverlayLayersProps) {
   const [messageIcon] = useImage(COMMENT_ICON);

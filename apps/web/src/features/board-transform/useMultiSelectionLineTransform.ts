@@ -5,7 +5,13 @@ import type * as Y from "yjs";
 import { runTrackedAction } from "../board-history";
 import type { BoardElement } from "../../entities/board";
 
-type Box = { x: number; y: number; width: number; height: number };
+type Box = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  rotation: number;
+};
 
 export function useMultiSelectionLineTransform({
   trRef,

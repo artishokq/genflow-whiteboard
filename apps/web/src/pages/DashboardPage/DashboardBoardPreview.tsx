@@ -216,11 +216,25 @@ export function DashboardBoardPreview({
           continue;
         }
 
-        const src = boardImageSrc(boardId, el.imageFile, token);
-        const img = await loadImage(src);
-        if (!img) {
-          ctx.fillStyle = "#d9def4";
-          ctx.fillRect(
+        if (el.type === "image" || el.type === "video") {
+          const src = boardImageSrc(
+            boardId,
+            el.type === "image" ? el.imageFile : el.videoFile,
+            token,
+          );
+          const img = await loadImage(src);
+          if (!img) {
+            ctx.fillStyle = "#d9def4";
+            ctx.fillRect(
+              tx(el.x, scale, offsetX),
+              ty(el.y, scale, offsetY),
+              Math.max(6, el.width * scale),
+              Math.max(6, el.height * scale),
+            );
+            continue;
+          }
+          ctx.drawImage(
+            img,
             tx(el.x, scale, offsetX),
             ty(el.y, scale, offsetY),
             Math.max(6, el.width * scale),
@@ -228,13 +242,6 @@ export function DashboardBoardPreview({
           );
           continue;
         }
-        ctx.drawImage(
-          img,
-          tx(el.x, scale, offsetX),
-          ty(el.y, scale, offsetY),
-          Math.max(6, el.width * scale),
-          Math.max(6, el.height * scale),
-        );
       }
 
       rememberPreview(cacheKey, canvas.toDataURL("image/png"));

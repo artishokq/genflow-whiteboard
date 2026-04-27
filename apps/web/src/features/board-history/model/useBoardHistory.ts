@@ -5,6 +5,7 @@ import type { BoardHistoryEntry } from "./historyOrigins";
 import { consumePendingHistoryAction } from "./localActionQueue";
 
 const MAX_HISTORY_ENTRIES = 40;
+type UndoRedoKind = "undo" | "redo";
 
 export function useBoardHistory({
   undoManager,
@@ -39,18 +40,22 @@ export function useBoardHistory({
       ]);
       syncStackState();
     };
-    const onStackItemPopped = (_evt: unknown, meta: { type: "undo" | "redo" }) => {
+    const onStackItemPopped = (evt: unknown, _undoManager: Y.UndoManager) => {
+      const kind: UndoRedoKind =
+        (evt as { type?: UndoRedoKind } | null)?.type === "redo"
+          ? "redo"
+          : "undo";
       consumePendingHistoryAction();
       setEntries((prev) => [
         {
           id: crypto.randomUUID(),
           labelKey:
-            meta.type === "undo"
+            kind === "undo"
               ? "board.historyAction.undo"
               : "board.historyAction.redo",
           actor: actorName.trim() || "Unknown user",
           at: Date.now(),
-          kind: meta.type,
+          kind,
         },
         ...prev.slice(0, MAX_HISTORY_ENTRIES - 1),
       ]);

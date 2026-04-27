@@ -2,7 +2,7 @@ import type { RefObject } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import type { FramePreset } from "../../../entities/board";
+import type { BoardTool, FramePreset } from "../../../entities/board";
 import type { BoardCanvasHandle } from "../../board-canvas";
 
 import {

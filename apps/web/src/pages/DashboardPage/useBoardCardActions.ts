@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState, type Dispatch, type SetStateAction } from "react";
+import type { TFunction } from "i18next";
 
 import {
   addBoardToSectionRequest,
@@ -11,12 +12,10 @@ import {
 } from "../../shared/api/boardsApi";
 import { getApiErrorMessage } from "../../shared/api/getApiErrorMessage";
 
-type TranslateFn = (key: string, options?: Record<string, unknown>) => string;
-
 type UseBoardCardActionsParams = {
   boards: BoardSummary[];
   setBoards: Dispatch<SetStateAction<BoardSummary[]>>;
-  t: TranslateFn;
+  t: TFunction;
   reloadSections: () => Promise<void>;
   setError: (value: string | null) => void;
   currentSectionId?: string;
