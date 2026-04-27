@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as Y from "yjs";
 import { runTrackedAction } from "../board-history";
+import { generateId } from "../../shared/lib/generateId";
 
 export function useBoardClipboard({
   ydoc,
@@ -123,7 +124,7 @@ export function useBoardClipboard({
         for (const raw of payload) {
           const map = new Y.Map<unknown>();
           const oldId = typeof raw.id === "string" ? raw.id : "";
-          const newId = crypto.randomUUID();
+          const newId = generateId();
           if (oldId) {
             idMap.set(oldId, newId);
           }

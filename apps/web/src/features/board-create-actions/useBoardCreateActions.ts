@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import * as Y from "yjs";
 
 import { runTrackedAction } from "../board-history";
+import { generateId } from "../../shared/lib/generateId";
 import {
   framePresetSize,
   resolveFrameIdAt,
@@ -47,7 +48,7 @@ export function useBoardCreateActions({
       actor: historyActor,
       fn: () => {
         const map = new Y.Map<unknown>();
-        const id = crypto.randomUUID();
+        const id = generateId();
         map.set("id", id);
         map.set("type", "rect");
         map.set("shapeKind", "square");
@@ -90,7 +91,7 @@ export function useBoardCreateActions({
         actor: historyActor,
         fn: () => {
           const map = new Y.Map<unknown>();
-          const id = crypto.randomUUID();
+          const id = generateId();
           map.set("id", id);
           if (
             selectedShapeKind === "line" ||
@@ -165,7 +166,7 @@ export function useBoardCreateActions({
 
   const addTextAt = useCallback(
     (wx: number, wy: number) => {
-      const id = crypto.randomUUID();
+      const id = generateId();
       runTrackedAction({
         ydoc,
         labelKey: "board.historyAction.createdText",
@@ -203,7 +204,7 @@ export function useBoardCreateActions({
 
   const addStickerAt = useCallback(
     (wx: number, wy: number) => {
-      const id = crypto.randomUUID();
+      const id = generateId();
       runTrackedAction({
         ydoc,
         labelKey: "board.historyAction.createdSticker",
@@ -251,7 +252,7 @@ export function useBoardCreateActions({
   const addFrameAt = useCallback(
     (wx: number, wy: number) => {
       const { width, height } = framePresetSize(selectedFramePreset);
-      const id = crypto.randomUUID();
+      const id = generateId();
       runTrackedAction({
         ydoc,
         labelKey: "board.historyAction.createdFrame",
@@ -291,7 +292,7 @@ export function useBoardCreateActions({
         actor: historyActor,
         fn: () => {
           const map = new Y.Map<unknown>();
-          const id = crypto.randomUUID();
+          const id = generateId();
           map.set("id", id);
           map.set("type", "image");
           map.set("x", wx - width / 2);
@@ -318,7 +319,7 @@ export function useBoardCreateActions({
         actor: historyActor,
         fn: () => {
           const map = new Y.Map<unknown>();
-          const id = crypto.randomUUID();
+          const id = generateId();
           map.set("id", id);
           map.set("type", "video");
           map.set("x", wx - width / 2);
@@ -339,7 +340,7 @@ export function useBoardCreateActions({
 
   const addGeneratedTextAt = useCallback(
     (text: string, wx: number, wy: number) => {
-      const id = crypto.randomUUID();
+      const id = generateId();
       runTrackedAction({
         ydoc,
         labelKey: "board.historyAction.createdText",

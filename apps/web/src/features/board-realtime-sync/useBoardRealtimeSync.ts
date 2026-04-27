@@ -5,6 +5,7 @@ import {
   getBoardSnapshotRequest,
   putBoardSnapshotRequest,
 } from "../../shared/api/boardsApi";
+import { generateId } from "../../shared/lib/generateId";
 import { boardWebSocketUrl } from "../../shared/lib/boardWsUrl";
 import { useAuthStore } from "../../shared/store/authStore";
 import type { PeerCursor } from "../../widgets/board-canvas/model/types";
@@ -39,7 +40,7 @@ export function useBoardRealtimeSync({
   const [remotePeers, setRemotePeers] = useState<Record<string, PeerCursor>>({});
   const accessToken = useAuthStore((s) => s.accessToken);
   const user = useAuthStore((s) => s.user);
-  const awarenessIdRef = useRef(crypto.randomUUID());
+  const awarenessIdRef = useRef(generateId());
   const isApplyingSnapshotRef = useRef(false);
   const saveTimerRef = useRef<number | null>(null);
   const awarenessTimerRef = useRef<number | null>(null);

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type * as Y from "yjs";
 
+import { generateId } from "../../../shared/lib/generateId";
 import type { BoardHistoryEntry } from "./historyOrigins";
 import { consumePendingHistoryAction } from "./localActionQueue";
 
@@ -29,7 +30,7 @@ export function useBoardHistory({
       const pending = consumePendingHistoryAction();
       setEntries((prev) => [
         {
-          id: crypto.randomUUID(),
+          id: generateId(),
           labelKey: pending?.labelKey ?? "board.historyAction.canvasEdit",
           ...(pending?.labelValues ? { labelValues: pending.labelValues } : {}),
           actor: pending?.actor ?? (actorName.trim() || "Unknown user"),
@@ -48,7 +49,7 @@ export function useBoardHistory({
       consumePendingHistoryAction();
       setEntries((prev) => [
         {
-          id: crypto.randomUUID(),
+          id: generateId(),
           labelKey:
             kind === "undo"
               ? "board.historyAction.undo"

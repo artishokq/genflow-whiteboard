@@ -1,6 +1,7 @@
 import { useEffect, type Dispatch, type RefObject, type SetStateAction } from "react";
 import * as Y from "yjs";
 import { runTrackedAction } from "../board-history";
+import { generateId } from "../../shared/lib/generateId";
 
 import {
   framePresetSize,
@@ -109,7 +110,7 @@ export function useBoardCreateCaptureFallback({
             actor: historyActor,
             fn: () => {
             const map = new Y.Map<unknown>();
-            const id = crypto.randomUUID();
+            const id = generateId();
             map.set("id", id);
             if (
               selectedShapeKind === "line" ||
@@ -164,7 +165,7 @@ export function useBoardCreateCaptureFallback({
           return true;
         }
         if (tool === "sticker") {
-          const id = crypto.randomUUID();
+          const id = generateId();
           runTrackedAction({
             ydoc,
             labelKey: "board.historyAction.createdSticker",
@@ -200,7 +201,7 @@ export function useBoardCreateCaptureFallback({
           return true;
         }
         if (tool === "frame") {
-          const id = crypto.randomUUID();
+          const id = generateId();
           const { width, height } = framePresetSize(selectedFramePreset);
           runTrackedAction({
             ydoc,
@@ -225,7 +226,7 @@ export function useBoardCreateCaptureFallback({
           return true;
         }
         if (tool === "text" && !editingTextId) {
-          const id = crypto.randomUUID();
+          const id = generateId();
           runTrackedAction({
             ydoc,
             labelKey: "board.historyAction.createdText",

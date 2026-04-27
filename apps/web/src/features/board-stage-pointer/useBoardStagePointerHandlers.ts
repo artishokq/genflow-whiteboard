@@ -9,6 +9,7 @@ import type Konva from "konva";
 import * as Y from "yjs";
 
 import { LOCAL_HISTORY_ORIGIN, runTrackedAction } from "../board-history";
+import { generateId } from "../../shared/lib/generateId";
 import {
   pointInFrame,
   resolveFrameIdAt,
@@ -483,7 +484,7 @@ export function useBoardStagePointerHandlers({
             actor: historyActor,
             fn: () => {
             const map = new Y.Map<unknown>();
-            const id = crypto.randomUUID();
+            const id = generateId();
             map.set("id", id);
             map.set("type", "line");
             map.set("x", 0);
