@@ -72,7 +72,9 @@ export default function BoardPage() {
 
   const comments = useBoardComments({ boardId, shareToken, t });
   const ai = useBoardAiGeneration({ boardId, shareToken, t });
-  const currentUserId = useAuthStore((s) => s.user?.id ?? null);
+  const currentUser = useAuthStore((s) => s.user);
+  const currentUserId = currentUser?.id ?? null;
+  const canUseAi = currentUser?.role === "admin";
 
   useEffect(() => {
     if (!boardId || !shareToken) {
@@ -99,6 +101,12 @@ export default function BoardPage() {
       setPendingCommentAnchor(null);
     }
   }, [dock.activeTool]);
+
+  useEffect(() => {
+    if (!canUseAi) {
+      ai.setAiMode(null);
+    }
+  }, [ai.setAiMode, canUseAi]);
 
   useEffect(() => {
     if (dock.activeTool === "comment") {
@@ -289,6 +297,7 @@ export default function BoardPage() {
         disabled={!!error || loading || readOnly}
         zoomPercent={zoomPercent}
         dock={dock}
+        canUseAi={canUseAi}
         aiMode={ai.mode}
         onSelectAiMode={(mode) => {
           ai.setAiMode(mode);

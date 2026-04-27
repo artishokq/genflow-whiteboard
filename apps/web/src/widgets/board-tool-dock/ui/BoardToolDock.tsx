@@ -37,6 +37,7 @@ export type BoardToolDockProps = {
   disabled: boolean;
   zoomPercent: number;
   dock: BoardDockState;
+  canUseAi?: boolean;
   aiMode?: "text" | "image" | "video" | null;
   onSelectAiMode?: (mode: "text" | "image" | "video") => void;
 };
@@ -46,6 +47,7 @@ export function BoardToolDock({
   disabled,
   zoomPercent,
   dock,
+  canUseAi = true,
   aiMode = null,
   onSelectAiMode,
 }: BoardToolDockProps) {
@@ -489,62 +491,64 @@ export function BoardToolDock({
             </div>
           ) : null}
         </div>
-        <div className={styles.toolPopupAnchor} ref={aiMenuRef}>
-          <button
-            type="button"
-            className={`${styles.dockToolIconButton} ${aiMenuOpen || aiMode ? styles.dockToolButtonActive : ""}`}
-            disabled={disabled}
-            onClick={() => setAiMenuOpen((prev) => !prev)}
-            aria-label="AI"
-            title="AI"
-          >
-            <img
-              src={AI_ICON}
-              alt=""
-              className={`${styles.dockToolIcon} ${styles.dockToolIconAi}`}
-            />
-          </button>
-          {aiMenuOpen ? (
-            <div className={styles.aiPopup} role="menu" aria-label="AI actions">
-              <button
-                type="button"
-                className={styles.aiOptionButton}
-                aria-label={t("board.toolText")}
-                title={t("board.comingSoon")}
-                onClick={() => {
-                  onSelectAiMode?.("text");
-                  setAiMenuOpen(false);
-                }}
-              >
-                <img src={TEXT_ICON} alt="" className={styles.dockToolIcon} />
-              </button>
-              <button
-                type="button"
-                className={styles.aiOptionButton}
-                aria-label={t("board.toolImage")}
-                title={t("board.comingSoon")}
-                onClick={() => {
-                  onSelectAiMode?.("image");
-                  setAiMenuOpen(false);
-                }}
-              >
-                <img src={IMAGE_ICON} alt="" className={styles.dockToolIcon} />
-              </button>
-              <button
-                type="button"
-                className={styles.aiOptionButton}
-                aria-label="Video"
-                title={t("board.comingSoon")}
-                onClick={() => {
-                  onSelectAiMode?.("video");
-                  setAiMenuOpen(false);
-                }}
-              >
-                <img src={CLIP_ICON} alt="" className={styles.dockToolIcon} />
-              </button>
-            </div>
-          ) : null}
-        </div>
+        {canUseAi ? (
+          <div className={styles.toolPopupAnchor} ref={aiMenuRef}>
+            <button
+              type="button"
+              className={`${styles.dockToolIconButton} ${aiMenuOpen || aiMode ? styles.dockToolButtonActive : ""}`}
+              disabled={disabled}
+              onClick={() => setAiMenuOpen((prev) => !prev)}
+              aria-label="AI"
+              title="AI"
+            >
+              <img
+                src={AI_ICON}
+                alt=""
+                className={`${styles.dockToolIcon} ${styles.dockToolIconAi}`}
+              />
+            </button>
+            {aiMenuOpen ? (
+              <div className={styles.aiPopup} role="menu" aria-label="AI actions">
+                <button
+                  type="button"
+                  className={styles.aiOptionButton}
+                  aria-label={t("board.toolText")}
+                  title={t("board.comingSoon")}
+                  onClick={() => {
+                    onSelectAiMode?.("text");
+                    setAiMenuOpen(false);
+                  }}
+                >
+                  <img src={TEXT_ICON} alt="" className={styles.dockToolIcon} />
+                </button>
+                <button
+                  type="button"
+                  className={styles.aiOptionButton}
+                  aria-label={t("board.toolImage")}
+                  title={t("board.comingSoon")}
+                  onClick={() => {
+                    onSelectAiMode?.("image");
+                    setAiMenuOpen(false);
+                  }}
+                >
+                  <img src={IMAGE_ICON} alt="" className={styles.dockToolIcon} />
+                </button>
+                <button
+                  type="button"
+                  className={styles.aiOptionButton}
+                  aria-label="Video"
+                  title={t("board.comingSoon")}
+                  onClick={() => {
+                    onSelectAiMode?.("video");
+                    setAiMenuOpen(false);
+                  }}
+                >
+                  <img src={CLIP_ICON} alt="" className={styles.dockToolIcon} />
+                </button>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
         <button
           type="button"
           className={`${styles.dockToolIconButton} ${isToolActive("comment") ? styles.dockToolButtonActive : ""}`}

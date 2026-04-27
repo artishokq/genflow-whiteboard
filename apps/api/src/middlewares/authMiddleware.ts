@@ -23,4 +23,14 @@ function requireAuth(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
-export { requireAuth };
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (!req.user) {
+    return next(ApiError.UnauthorizedError());
+  }
+  if (req.user.role !== "admin") {
+    return next(ApiError.Forbidden("Admin role is required"));
+  }
+  return next();
+}
+
+export { requireAuth, requireAdmin };

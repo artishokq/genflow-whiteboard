@@ -1,6 +1,6 @@
 import express, { Router } from "express";
 
-import { requireAuth } from "../middlewares/authMiddleware";
+import { requireAdmin, requireAuth } from "../middlewares/authMiddleware";
 import {
   authSessionLimiter,
   boardApiLimiter,
@@ -179,12 +179,14 @@ router.post(
   "/boards/:id/ai/generations",
   boardApiLimiter,
   requireAuth,
+  requireAdmin,
   boardController.createAiGeneration,
 );
 router.get(
   "/boards/:id/ai/generations/:requestId",
   boardApiLimiter,
   requireAuth,
+  requireAdmin,
   boardController.getAiGeneration,
 );
 router.post(
