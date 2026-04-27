@@ -1,4 +1,4 @@
-import { createHash, randomBytes } from "node:crypto";
+import { createHash, randomBytes, randomUUID } from "node:crypto";
 
 import { and, desc, eq, isNotNull, isNull, sql } from "drizzle-orm";
 import * as Y from "yjs";
@@ -107,7 +107,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
     ];
     for (const node of nodes) {
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "rect",
         shapeKind: node.kind === "circle" ? "circle" : "square",
         x: node.x,
@@ -123,7 +123,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
       });
       const textOffsetX = node.kind === "circle" ? 38 : 22;
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "text",
         textKind: "plain",
         x: node.x + textOffsetX,
@@ -149,7 +149,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
     ];
     for (const [x1, y1, x2, y2] of links) {
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "line",
         lineKind: "arrow",
         brushStroke: false,
@@ -176,7 +176,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
     ];
     for (const node of nodes) {
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "line",
         lineKind: "line",
         brushStroke: false,
@@ -192,7 +192,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
         composite: "source-over",
       });
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "rect",
         shapeKind: "square",
         x: node.x,
@@ -207,7 +207,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
         opacity: 1,
       });
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "text",
         textKind: "plain",
         x: node.x + 24,
@@ -226,7 +226,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
       });
     }
     addElement({
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       type: "rect",
       shapeKind: "circle",
       x: -100,
@@ -241,7 +241,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
       opacity: 1,
     });
     addElement({
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       type: "text",
       textKind: "plain",
       x: -54,
@@ -265,7 +265,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
       { title: "Action items", x: 260, color: "#ffd7cf" },
     ];
     for (const col of cols) {
-      const frameId = crypto.randomUUID();
+      const frameId = randomUUID();
       addElement({
         id: frameId,
         type: "frame",
@@ -278,7 +278,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
         rotation: 0,
       });
       addElement({
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         type: "text",
         textKind: "sticker",
         x: col.x + 58,
@@ -298,7 +298,7 @@ function buildTemplateState(templateId: BoardTemplateId): Buffer {
       });
     }
     addElement({
-      id: crypto.randomUUID(),
+      id: randomUUID(),
       type: "text",
       textKind: "plain",
       x: -520,
