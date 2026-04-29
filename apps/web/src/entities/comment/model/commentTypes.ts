@@ -1,34 +1,11 @@
-import type { BoardAccessRole } from "../../../shared/api/boardsApi";
+import type {
+  BoardCommentsPayload,
+  CommentMessageDto,
+  CommentThreadDto,
+  CommentThreadStatus,
+} from "shared";
 
-export type CommentThreadStatus = "open" | "resolved";
+export type { BoardCommentsPayload, CommentThreadStatus };
 
-export type CommentMessage = {
-  id: string;
-  threadId: string;
-  authorId: string;
-  text: string;
-  createdAt: string;
-  updatedAt: string;
-  authorFirstName: string;
-  authorLastName: string;
-  authorEmail: string;
-  /** Present when API returns it; omit on older payloads. */
-  authorAvatarObjectKey?: string | null;
-};
-
-export type CommentThread = {
-  id: string;
-  boardId: string;
-  anchorX: number;
-  anchorY: number;
-  status: CommentThreadStatus;
-  createdBy: string;
-  createdAt: string;
-  updatedAt: string;
-  messages: CommentMessage[];
-};
-
-export type BoardCommentsPayload = {
-  myRole: BoardAccessRole;
-  threads: CommentThread[];
-};
+export type CommentMessage = CommentMessageDto;
+export type CommentThread = CommentThreadDto;

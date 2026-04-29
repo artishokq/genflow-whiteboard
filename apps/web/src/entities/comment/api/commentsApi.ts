@@ -1,4 +1,5 @@
 import { apiClient } from "../../../shared/api/client";
+import { BoardCommentsPayloadSchema, CommentThreadStatusSchema } from "shared";
 
 import type { BoardCommentsPayload, CommentThreadStatus } from "../model/commentTypes";
 
@@ -18,7 +19,7 @@ export async function getBoardCommentsRequest(
     `/api/boards/${boardId}/comments`,
     shareParams(options),
   );
-  return data;
+  return BoardCommentsPayloadSchema.parse(data);
 }
 
 export async function createCommentThreadRequest(
@@ -54,9 +55,10 @@ export async function updateCommentThreadStatusRequest(
   status: CommentThreadStatus,
   options?: ShareOptions,
 ) {
+  const validatedStatus = CommentThreadStatusSchema.parse(status);
   const { data } = await apiClient.patch<{ message: string }>(
     `/api/boards/${boardId}/comments/threads/${encodeURIComponent(threadId)}`,
-    { status },
+    { status: validatedStatus },
     shareParams(options),
   );
   return data;

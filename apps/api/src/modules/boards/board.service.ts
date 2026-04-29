@@ -2,6 +2,11 @@ import { createHash, randomBytes, randomUUID } from "node:crypto";
 
 import { and, desc, eq, isNotNull, isNull, sql } from "drizzle-orm";
 import * as Y from "yjs";
+import type {
+  BoardAccessRole,
+  BoardCollaboratorRole,
+  BoardTemplateId,
+} from "shared";
 
 import { db } from "../../db/client";
 import {
@@ -19,9 +24,7 @@ const MAX_TITLE_LENGTH = 200;
 const MAX_SECTION_NAME_LENGTH = 64;
 const MAX_SNAPSHOT_BYTES = 16 * 1024 * 1024;
 
-export type BoardAccessRole = "owner" | "editor" | "viewer";
-export type BoardCollaboratorRole = "editor" | "viewer";
-export type BoardTemplateId = "blank" | "flowchart" | "mindmap" | "retrospective";
+export type { BoardAccessRole, BoardCollaboratorRole, BoardTemplateId } from "shared";
 
 export type BoardRow = {
   id: string;

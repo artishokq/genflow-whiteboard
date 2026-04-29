@@ -1,21 +1,20 @@
 import { apiClient } from "./client";
 
-export type AiGenerationMode = "text" | "image" | "video";
+import type {
+  AiGenerationCreateResponse,
+  AiGenerationMode,
+  AiGenerationStatusResponse,
+} from "shared";
+import {
+  AiGenerationCreateBodySchema,
+  AiGenerationCreateResponseSchema,
+  AiGenerationStatusResponseSchema,
+} from "shared";
 
-export type AiGenerationCreateResponse = {
-  requestId: string;
-  status: string;
-  model: string | null;
-  mode: AiGenerationMode;
-};
-
-export type AiGenerationStatusResponse = {
-  requestId: string;
-  status: string;
-  responseType: string | null;
-  progress: number | null;
-  result: string[];
-  fullResponse: unknown[];
+export type {
+  AiGenerationCreateResponse,
+  AiGenerationMode,
+  AiGenerationStatusResponse,
 };
 
 function shareParams(shareToken?: string | null) {
@@ -27,12 +26,13 @@ export async function createAiGenerationRequest(
   body: { mode: AiGenerationMode; prompt: string },
   options?: { shareToken?: string | null },
 ) {
+  const validatedBody = AiGenerationCreateBodySchema.parse(body);
   const { data } = await apiClient.post<AiGenerationCreateResponse>(
     `/api/boards/${boardId}/ai/generations`,
-    body,
+    validatedBody,
     shareParams(options?.shareToken),
   );
-  return data;
+  return AiGenerationCreateResponseSchema.parse(data);
 }
 
 export async function getAiGenerationStatusRequest(
@@ -44,5 +44,5 @@ export async function getAiGenerationStatusRequest(
     `/api/boards/${boardId}/ai/generations/${encodeURIComponent(requestId)}`,
     shareParams(options?.shareToken),
   );
-  return data;
+  return AiGenerationStatusResponseSchema.parse(data);
 }

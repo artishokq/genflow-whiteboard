@@ -1,4 +1,5 @@
 import { and, asc, eq, inArray } from "drizzle-orm";
+import type { CommentThreadStatus } from "shared";
 
 import { db } from "../../db/client";
 import {
@@ -7,8 +8,6 @@ import {
   users,
 } from "../../db/schema";
 import boardService from "./board.service";
-
-type ThreadStatus = "open" | "resolved";
 
 function canResolve(role: "owner" | "editor" | "viewer"): boolean {
   return role === "owner" || role === "editor";
@@ -170,7 +169,7 @@ class BoardCommentsService {
     boardId: string,
     threadId: string,
     shareToken: string | null | undefined,
-    status: ThreadStatus,
+    status: CommentThreadStatus,
   ) {
     const access = await boardService.resolveBoardAccess(userId, boardId, shareToken);
     if (!access) {

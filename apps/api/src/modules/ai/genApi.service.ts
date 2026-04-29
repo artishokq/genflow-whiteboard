@@ -1,6 +1,5 @@
 import crypto from "node:crypto";
-
-type GenerationMode = "text" | "image" | "video";
+import type { AiGenerationMode } from "shared";
 
 type OpenAiChatResponse = {
   id?: string;
@@ -117,7 +116,7 @@ async function parseJsonSafe<T>(res: Response): Promise<T | null> {
 }
 
 class GenApiService {
-  async createGeneration(mode: GenerationMode, prompt: string) {
+  async createGeneration(mode: AiGenerationMode, prompt: string) {
     if (mode === "image") {
       const response = await fetch(
         `${GEN_API_BASE}/networks/${encodeURIComponent(IMAGE_MODEL)}`,
@@ -279,5 +278,5 @@ class GenApiService {
 
 const genApiService = new GenApiService();
 
-export type { GenerationMode };
+export type { AiGenerationMode as GenerationMode };
 export default genApiService;

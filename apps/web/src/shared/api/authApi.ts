@@ -1,17 +1,11 @@
 import { apiClient } from "./client";
+import type { AuthSuccess, AuthUser } from "shared";
+import { AuthSuccessSchema, AuthUserSchema } from "shared";
 
 const rawBase =
   import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, "") ?? "http://localhost:3001";
 
-export type AuthUser = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  isEmailVerified: boolean;
-  role: string;
-  avatarObjectKey: string | null;
-};
+export type { AuthSuccess, AuthUser };
 
 /** Avatar image URL for `<img>` / Konva (token query; no Authorization header). */
 export function userAvatarSrc(
@@ -32,13 +26,6 @@ export function userAvatarSrc(
   u.searchParams.set("v", avatarObjectKey);
   return u.toString();
 }
-
-export type AuthSuccess = {
-  message: string;
-  user: AuthUser;
-  accessToken: string;
-  redirectTo?: string;
-};
 
 export async function registerRequest(body: {
   email: string;
@@ -61,7 +48,7 @@ export async function confirmRegistrationRequest(body: {
     "/api/register/confirm",
     body,
   );
-  return data;
+  return AuthSuccessSchema.parse(data);
 }
 
 export async function resendRegistrationCodeRequest(body: { email: string }) {
@@ -74,7 +61,7 @@ export async function resendRegistrationCodeRequest(body: { email: string }) {
 
 export async function loginRequest(body: { email: string; password: string }) {
   const { data } = await apiClient.post<AuthSuccess>("/api/login", body);
-  return data;
+  return AuthSuccessSchema.parse(data);
 }
 
 export async function logoutRequest() {
@@ -88,12 +75,12 @@ export async function refreshSessionRequest(options?: {
   const { data } = await apiClient.get<AuthSuccess>("/api/refresh", {
     signal: options?.signal,
   });
-  return data;
+  return AuthSuccessSchema.parse(data);
 }
 
 export async function getMeRequest() {
   const { data } = await apiClient.get<{ user: AuthUser }>("/api/me");
-  return data;
+  return { user: AuthUserSchema.parse(data.user) };
 }
 
 export async function updateFirstNameRequest(firstName: string) {
@@ -101,7 +88,7 @@ export async function updateFirstNameRequest(firstName: string) {
     "/api/profile/first-name",
     { firstName },
   );
-  return data;
+  return { ...data, user: AuthUserSchema.parse(data.user) };
 }
 
 export async function updateLastNameRequest(lastName: string) {
@@ -109,7 +96,7 @@ export async function updateLastNameRequest(lastName: string) {
     "/api/profile/last-name",
     { lastName },
   );
-  return data;
+  return { ...data, user: AuthUserSchema.parse(data.user) };
 }
 
 export async function requestEmailChange(body: {
@@ -125,7 +112,7 @@ export async function requestEmailChange(body: {
 
 export async function confirmEmailChange(body: { email: string; code: string }) {
   const { data } = await apiClient.post<AuthSuccess>("/api/profile/email/confirm", body);
-  return data;
+  return AuthSuccessSchema.parse(data);
 }
 
 export async function changePasswordRequest(body: {
@@ -174,12 +161,12 @@ export async function uploadUserAvatarRequest(file: File) {
     "/api/profile/avatar",
     body,
   );
-  return data;
+  return { ...data, user: AuthUserSchema.parse(data.user) };
 }
 
 export async function deleteUserAvatarRequest() {
   const { data } = await apiClient.delete<{ message: string; user: AuthUser }>(
     "/api/profile/avatar",
   );
-  return data;
+  return { ...data, user: AuthUserSchema.parse(data.user) };
 }

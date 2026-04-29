@@ -1,40 +1,23 @@
 import { apiClient } from "./client";
 
-export type BoardAccessRole = "owner" | "editor" | "viewer";
-export type BoardTemplateId = "blank" | "flowchart" | "mindmap" | "retrospective";
+import type {
+  BoardAccessRole,
+  BoardMemberRow,
+  BoardSectionSummary,
+  BoardShareLinkRole,
+  BoardShareLinkRow,
+  BoardSummary,
+  BoardTemplateId,
+} from "shared";
 
-export type BoardSummary = {
-  id: string;
-  title: string;
-  isStarred: boolean;
-  myRole: BoardAccessRole;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export type BoardShareLinkRow = {
-  id: string;
-  role: "viewer" | "editor";
-  createdAt: string;
-  revokedAt: string | null;
-};
-
-export type BoardMemberRow = {
-  userId: string;
-  role: "viewer" | "editor";
-  createdAt: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  avatarObjectKey: string | null;
-};
-
-export type BoardSectionSummary = {
-  id: string;
-  name: string;
-  position: number;
-  boardsCount: number;
-  containsBoard: boolean;
+export type {
+  BoardAccessRole,
+  BoardMemberRow,
+  BoardSectionSummary,
+  BoardShareLinkRole,
+  BoardShareLinkRow,
+  BoardSummary,
+  BoardTemplateId,
 };
 
 function shareParams(shareToken?: string | null) {
@@ -188,7 +171,7 @@ export async function uploadBoardImageRequest(
 
 export async function createBoardShareLinkRequest(
   boardId: string,
-  role: "viewer" | "editor",
+  role: BoardShareLinkRole,
 ) {
   const { data } = await apiClient.post<{
     message: string;
@@ -221,7 +204,7 @@ export async function listBoardMembersRequest(boardId: string) {
 export async function updateBoardMemberRoleRequest(
   boardId: string,
   userId: string,
-  role: "viewer" | "editor",
+  role: BoardShareLinkRole,
 ) {
   const { data } = await apiClient.post<{ message: string }>(
     `/api/boards/${boardId}/members`,
