@@ -362,7 +362,6 @@ export const BoardCanvas = forwardRef<BoardCanvasHandle, BoardCanvasProps>(
       boardColor,
       stagePos,
       scale,
-      size,
       elements,
       canvasBounds,
       elementBounds,
@@ -519,7 +518,7 @@ export const BoardCanvas = forwardRef<BoardCanvasHandle, BoardCanvasProps>(
       ],
     );
 
-    const grid = useBoardGrid({ size, stagePos, scale });
+    const grid = useBoardGrid({ size, stagePos, scale, canvasBounds });
 
     const strokeW = 1 / scale;
     const hitStroke = 14 / scale;

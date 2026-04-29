@@ -6,12 +6,26 @@ import { boardImageSrc } from "../../../shared/api/boardsApi";
 import type { CanvasBounds } from "../../../widgets/board-canvas/model/types";
 import { downloadBlob, downloadTextFile } from "./download";
 
+const EXPORT_MAX_CANVAS_SIDE = 8192;
+
+function clampExportPixelRatio(
+  width: number,
+  height: number,
+  pixelRatio: number,
+): number {
+  const w = Math.max(1, Math.round(width));
+  const h = Math.max(1, Math.round(height));
+  const maxByW = Math.floor(EXPORT_MAX_CANVAS_SIDE / w);
+  const maxByH = Math.floor(EXPORT_MAX_CANVAS_SIDE / h);
+  const cap = Math.max(1, Math.min(maxByW, maxByH));
+  return Math.max(1, Math.min(pixelRatio, cap));
+}
+
 export function useBoardExportActions({
   stageRef,
   boardColor,
   stagePos,
   scale,
-  size,
   elements,
   canvasBounds,
   elementBounds,
@@ -23,7 +37,6 @@ export function useBoardExportActions({
   boardColor: string;
   stagePos: { x: number; y: number };
   scale: number;
-  size: { w: number; h: number };
   elements: BoardElement[];
   canvasBounds: CanvasBounds;
   elementBounds: (el: BoardElement) => {
@@ -37,36 +50,72 @@ export function useBoardExportActions({
   shareToken?: string | null;
 }) {
   const exportStageRegionPng = useCallback(
-    async (opts: {
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-      pixelRatio: number;
-    }) => {
+    async (
+      opts: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+        pixelRatio: number;
+      },
+      
+      neutralizeStagePanZoom: boolean,
+    ) => {
       const stage = stageRef.current;
       if (!stage) return;
-      const dataUrl = stage.toDataURL({
-        x: opts.x,
-        y: opts.y,
-        width: opts.width,
-        height: opts.height,
-        pixelRatio: opts.pixelRatio,
-      });
+      const pixelRatio = clampExportPixelRatio(
+        opts.width,
+        opts.height,
+        opts.pixelRatio,
+      );
+
+      let savedX = 0;
+      let savedY = 0;
+      let savedSx = 1;
+      let savedSy = 1;
+      if (neutralizeStagePanZoom) {
+        savedX = stage.x();
+        savedY = stage.y();
+        savedSx = stage.scaleX();
+        savedSy = stage.scaleY();
+        stage.scale({ x: 1, y: 1 });
+        stage.position({ x: 0, y: 0 });
+        stage.batchDraw();
+      }
+
+      let dataUrl: string;
+      try {
+        dataUrl = stage.toDataURL({
+          x: opts.x,
+          y: opts.y,
+          width: opts.width,
+          height: opts.height,
+          pixelRatio,
+        });
+      } finally {
+        if (neutralizeStagePanZoom) {
+          stage.scale({ x: savedSx, y: savedSy });
+          stage.position({ x: savedX, y: savedY });
+          stage.batchDraw();
+        }
+      }
       const image = await new Promise<HTMLImageElement>((resolve, reject) => {
         const img = new Image();
         img.onload = () => resolve(img);
         img.onerror = () => reject(new Error("Failed to load stage image"));
         img.src = dataUrl;
       });
+      const iw = Math.max(1, image.naturalWidth || 1);
+      const ih = Math.max(1, image.naturalHeight || 1);
       const canvas = document.createElement("canvas");
-      canvas.width = Math.max(1, Math.round(opts.width * opts.pixelRatio));
-      canvas.height = Math.max(1, Math.round(opts.height * opts.pixelRatio));
+      canvas.width = iw;
+      canvas.height = ih;
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
       ctx.fillStyle = boardColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(image, 0, 0);
       const blob = await new Promise<Blob | null>((resolve) => {
         canvas.toBlob((value) => resolve(value), "image/png");
       });
@@ -81,15 +130,20 @@ export function useBoardExportActions({
     async (pixelRatio = 2) => {
       const stage = stageRef.current;
       if (!stage) return;
-      await exportStageRegionPng({
-        x: -stagePos.x / scale,
-        y: -stagePos.y / scale,
-        width: size.w / scale,
-        height: size.h / scale,
-        pixelRatio,
-      });
+      const sw = Math.max(1, stage.width());
+      const sh = Math.max(1, stage.height());
+      await exportStageRegionPng(
+        {
+          x: -stagePos.x / scale,
+          y: -stagePos.y / scale,
+          width: sw / scale,
+          height: sh / scale,
+          pixelRatio,
+        },
+        false,
+      );
     },
-    [exportStageRegionPng, scale, size.h, size.w, stagePos.x, stagePos.y, stageRef],
+    [exportStageRegionPng, scale, stagePos.x, stagePos.y, stageRef],
   );
 
   const exportPngFullBoard = useCallback(
@@ -115,13 +169,16 @@ export function useBoardExportActions({
         return;
       }
       const pad = 32;
-      await exportStageRegionPng({
-        x: bounds.minX - pad,
-        y: bounds.minY - pad,
-        width: Math.max(1, bounds.maxX - bounds.minX + pad * 2),
-        height: Math.max(1, bounds.maxY - bounds.minY + pad * 2),
-        pixelRatio,
-      });
+      await exportStageRegionPng(
+        {
+          x: bounds.minX - pad,
+          y: bounds.minY - pad,
+          width: Math.max(1, bounds.maxX - bounds.minX + pad * 2),
+          height: Math.max(1, bounds.maxY - bounds.minY + pad * 2),
+          pixelRatio,
+        },
+        true,
+      );
     },
     [elementBounds, elements, exportPngViewport, exportStageRegionPng],
   );

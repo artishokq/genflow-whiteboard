@@ -2,23 +2,29 @@ import { useMemo } from "react";
 
 import { GRID_STEP } from "../../widgets/board-canvas/model/constants";
 import { worldBounds } from "../../widgets/board-canvas/model/geometry";
+import type { CanvasBounds } from "../../widgets/board-canvas/model/types";
 
 export function useBoardGrid({
   size,
   stagePos,
   scale,
+  canvasBounds,
 }: {
   size: { w: number; h: number };
   stagePos: { x: number; y: number };
   scale: number;
+  canvasBounds: CanvasBounds;
 }) {
   return useMemo(() => {
-    const { worldLeft, worldTop, worldRight, worldBottom } = worldBounds(
-      size.w,
-      size.h,
-      stagePos,
-      scale,
-    );
+    const vp = worldBounds(size.w, size.h, stagePos, scale);
+    let worldLeft = vp.worldLeft;
+    let worldTop = vp.worldTop;
+    let worldRight = vp.worldRight;
+    let worldBottom = vp.worldBottom;
+    worldLeft = Math.min(worldLeft, canvasBounds.minX);
+    worldTop = Math.min(worldTop, canvasBounds.minY);
+    worldRight = Math.max(worldRight, canvasBounds.maxX);
+    worldBottom = Math.max(worldBottom, canvasBounds.maxY);
     const pad = GRID_STEP * 4;
     const xs: number[] = [];
     const ys: number[] = [];
@@ -33,5 +39,5 @@ export function useBoardGrid({
       y += GRID_STEP;
     }
     return { xs, ys, worldLeft, worldTop, worldRight, worldBottom, pad };
-  }, [scale, size.h, size.w, stagePos]);
+  }, [canvasBounds, scale, size.h, size.w, stagePos]);
 }
