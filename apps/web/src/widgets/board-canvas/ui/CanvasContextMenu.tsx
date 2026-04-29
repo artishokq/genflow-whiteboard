@@ -55,7 +55,7 @@ export function CanvasContextMenu({
               onClose();
             }}
           >
-            Copy
+            {t("board.contextMenuCopy")}
           </button>
           <button
             type="button"
@@ -65,7 +65,7 @@ export function CanvasContextMenu({
               onClose();
             }}
           >
-            Duplicate
+            {t("board.contextMenuDuplicate")}
           </button>
           {canDownloadImage ? (
             <button
@@ -87,7 +87,7 @@ export function CanvasContextMenu({
               onClose();
             }}
           >
-            Delete
+            {t("board.contextMenuDelete")}
           </button>
         </>
       ) : (
@@ -100,7 +100,7 @@ export function CanvasContextMenu({
             onClose();
           }}
         >
-          Paste
+          {t("board.contextMenuPaste")}
         </button>
       )}
     </div>

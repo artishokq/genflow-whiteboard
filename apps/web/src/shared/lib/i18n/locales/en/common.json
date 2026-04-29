@@ -320,6 +320,10 @@
     "generationAccept": "Add to canvas",
     "generationDiscard": "Discard all",
     "generationStopped": "Generation stopped",
+    "contextMenuCopy": "Copy",
+    "contextMenuDuplicate": "Duplicate",
+    "contextMenuDelete": "Delete",
+    "contextMenuPaste": "Paste",
     "contextMenuDownloadImage": "Download"
   }
 }

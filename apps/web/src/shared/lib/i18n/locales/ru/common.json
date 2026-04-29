@@ -320,6 +320,10 @@
     "generationAccept": "Добавить на доску",
     "generationDiscard": "Отклонить все",
     "generationStopped": "Генерация остановлена",
+    "contextMenuCopy": "Копировать",
+    "contextMenuDuplicate": "Дублировать",
+    "contextMenuDelete": "Удалить",
+    "contextMenuPaste": "Вставить",
     "contextMenuDownloadImage": "Скачать"
   }
 }
