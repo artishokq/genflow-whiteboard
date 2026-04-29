@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import { useCallback, useState } from "react";
 import type * as Y from "yjs";
 
 import type { BoardElement } from "../../../entities/board";
@@ -30,21 +30,20 @@ type ActiveTextElement = Extract<BoardElement, { type: "text" }>;
 
 type TextToolbarProps = {
   activeTextElement: ActiveTextElement;
-  alignMenuOpen: boolean;
-  setAlignMenuOpen: Dispatch<SetStateAction<boolean>>;
-  styleMenuOpen: boolean;
-  setStyleMenuOpen: Dispatch<SetStateAction<boolean>>;
   updateTextElement: (id: string, updater: (map: Y.Map<unknown>) => void) => void;
 };
 
 export function TextToolbar({
   activeTextElement,
-  alignMenuOpen,
-  setAlignMenuOpen,
-  styleMenuOpen,
-  setStyleMenuOpen,
   updateTextElement,
 }: TextToolbarProps) {
+  const [alignMenuOpen, setAlignMenuOpen] = useState(false);
+  const [styleMenuOpen, setStyleMenuOpen] = useState(false);
+  const closeTextDropdowns = useCallback(() => {
+    setAlignMenuOpen(false);
+    setStyleMenuOpen(false);
+  }, []);
+
   return (
     <div
       style={{
@@ -68,6 +67,7 @@ export function TextToolbar({
     >
       <select
         value={activeTextElement.fontFamily}
+        onPointerDown={closeTextDropdowns}
         style={{
           height: 34,
           minWidth: 150,
@@ -98,6 +98,7 @@ export function TextToolbar({
         min={8}
         max={180}
         value={Math.round(activeTextElement.fontSize)}
+        onPointerDown={closeTextDropdowns}
         onChange={(e) =>
           updateTextElement(activeTextElement.id, (map) => {
             map.set("fontSize", Math.max(8, Number(e.target.value) || 8));
@@ -300,7 +301,10 @@ export function TextToolbar({
           </div>
         ) : null}
       </div>
-      <label style={textToolbarColorButtonStyle}>
+      <label
+        style={textToolbarColorButtonStyle}
+        onPointerDown={closeTextDropdowns}
+      >
         <img
           src={TEXT_COLOR_ICON}
           alt="text color"
@@ -318,7 +322,10 @@ export function TextToolbar({
           style={textToolbarColorInputStyle}
         />
       </label>
-      <label style={textToolbarColorButtonStyle}>
+      <label
+        style={textToolbarColorButtonStyle}
+        onPointerDown={closeTextDropdowns}
+      >
         <img
           src={TEXT_BG_ICON}
           alt="text background"
@@ -360,6 +367,7 @@ export function TextToolbar({
                 <button
                   key={color}
                   type="button"
+                  onPointerDown={closeTextDropdowns}
                   onClick={() =>
                     updateTextElement(activeTextElement.id, (map) => {
                       map.set("background", color);

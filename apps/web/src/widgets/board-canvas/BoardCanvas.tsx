@@ -155,8 +155,6 @@ export const BoardCanvas = forwardRef<BoardCanvasHandle, BoardCanvasProps>(
     const [marquee, setMarquee] = useState<MarqueeBox | null>(null);
     const [, setActiveTextId] = useState<string | null>(null);
     const [editingTextId, setEditingTextId] = useState<string | null>(null);
-    const [alignMenuOpen, setAlignMenuOpen] = useState(false);
-    const [styleMenuOpen, setStyleMenuOpen] = useState(false);
     const [shapeFillMenuOpen, setShapeFillMenuOpen] = useState(false);
     const [shapeStrokeMenuOpen, setShapeStrokeMenuOpen] = useState(false);
     const [lineStartCapMenuOpen, setLineStartCapMenuOpen] = useState(false);
@@ -724,11 +722,8 @@ export const BoardCanvas = forwardRef<BoardCanvasHandle, BoardCanvasProps>(
         ) : null}
         {activeTextElement && !readOnly ? (
           <TextToolbar
+            key={`${activeTextElement.id}:${editingTextId ?? ""}`}
             activeTextElement={activeTextElement}
-            alignMenuOpen={alignMenuOpen}
-            setAlignMenuOpen={setAlignMenuOpen}
-            styleMenuOpen={styleMenuOpen}
-            setStyleMenuOpen={setStyleMenuOpen}
             updateTextElement={updateTextElement}
           />
         ) : null}
